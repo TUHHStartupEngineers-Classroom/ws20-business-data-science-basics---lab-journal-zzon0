@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Lucas Ernst" />
+
+<meta name="date" content="2020-12-01" />
+
+<title>Journal (reproducible report)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MyLabJournal</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="journal.html">Journal</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Class notes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="dictionary.html">Dictionary</a>
+    </li>
+    <li>
+      <a href="data_wrangling.html">Data Wrangling</a>
+    </li>
+    <li>
+      <a href="ggplot_graphs.html">ggplot graphs</a>
+    </li>
+    <li>
+      <a href="machine_learning.html">machine learning</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="links.html">Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Journal (reproducible report)</h1>
+<h4 class="author">Lucas Ernst</h4>
+<h4 class="date">2020-12-01</h4>
+
+</div>
+
+
+<div id="intro-to-the-tidyverse" class="section level1">
+<h1><span class="header-section-number">1</span> Intro to the tidyverse</h1>
+<pre class="r"><code># Data Science at TUHH ------------------------------------------------------
+# SALES ANALYSIS ----
+
+# 1.0 Load libraries ----
+library(tidyverse)
+library(readxl)
+library(lubridate)
+library(ggplot2)
+
+
+# 2.0 Importing Files ----
+bikes &lt;- read_excel(&quot;D:/Lucas/Uni/Data Science/DS_101/00_data/01_bike_sales/01_raw_data/bikes.xlsx&quot;)
+bikeshops &lt;- read_excel(&quot;D:/Lucas/Uni/Data Science/DS_101/00_data/01_bike_sales/01_raw_data/bikeshops.xlsx&quot;)
+orderlines &lt;- read_excel(&quot;D:/Lucas/Uni/Data Science/DS_101/00_data/01_bike_sales/01_raw_data/orderlines.xlsx&quot;)
+
+# 3.0 Examining Data ----
+glimpse(bikes)</code></pre>
+<pre><code>## Rows: 231
+## Columns: 9
+## $ bike.id        &lt;dbl&gt; 2875, 2873, 2874, 2876, 2877, 2225, 2091, 2086, 2088...
+## $ model          &lt;chr&gt; &quot;Aeroad CF SL Disc 8.0 Di2&quot;, &quot;Aeroad CF SLX Disc 9.0...
+## $ model.year     &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2019, 2019, 2021, 2020...
+## $ frame.material &lt;chr&gt; &quot;carbon&quot;, &quot;carbon&quot;, &quot;carbon&quot;, &quot;carbon&quot;, &quot;carbon&quot;, &quot;c...
+## $ weight         &lt;dbl&gt; 7.60, 7.27, 7.10, 7.73, 7.83, 6.80, 6.80, 7.60, 7.30...
+## $ price          &lt;dbl&gt; 4579, 6919, 6429, 5069, 3609, 6139, 5359, 2629, 3699...
+## $ category       &lt;chr&gt; &quot;Road - Race - Aeroad&quot;, &quot;Road - Race - Aeroad&quot;, &quot;Roa...
+## $ gender         &lt;chr&gt; &quot;unisex&quot;, &quot;unisex&quot;, &quot;unisex&quot;, &quot;unisex&quot;, &quot;unisex&quot;, &quot;u...
+## $ url            &lt;chr&gt; &quot;https://www.canyon.com/en-de/road-bikes/race-bikes/...</code></pre>
+<pre class="r"><code>bikes %&gt;% select(c(model,bike.id,model.year))</code></pre>
+<pre><code>## # A tibble: 231 x 3
+##    model                       bike.id model.year
+##    &lt;chr&gt;                         &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Aeroad CF SL Disc 8.0 Di2      2875       2020
+##  2 Aeroad CF SLX Disc 9.0 ETAP    2873       2020
+##  3 Aeroad CF SLX Disc 9.0 Di2     2874       2020
+##  4 Aeroad CF SL Disc 8.0 ETAP     2876       2020
+##  5 Aeroad CF SL Disc 8.0          2877       2020
+##  6 Aeroad CF SLX 9.0 SL           2225       2019
+##  7 Aeroad CF SLX 9.0 Di2          2091       2019
+##  8 Aeroad CF SL 7.0               2086       2021
+##  9 Aeroad CF SL 8.0 Di2           2088       2020
+## 10 Aeroad WMN CF SL 8.0           2120       2020
+## # ... with 221 more rows</code></pre>
+<pre class="r"><code># 4.0 Joining Data ----
+
+bike_orderlines_joined &lt;- orderlines %&gt;%
+  left_join(bikes, by = c(&quot;product.id&quot; = &quot;bike.id&quot;)) %&gt;%
+  left_join(bikeshops, by = c(&quot;customer.id&quot; = &quot;bikeshop.id&quot;))
+glimpse(bike_orderlines_joined)</code></pre>
+<pre><code>## Rows: 15,644
+## Columns: 19
+## $ ...1           &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot;, &quot;...
+## $ order.id       &lt;dbl&gt; 1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 6, 6, 6, 6...
+## $ order.line     &lt;dbl&gt; 1, 2, 1, 2, 1, 2, 3, 4, 5, 1, 1, 2, 3, 4, 1, 2, 3, 4...
+## $ order.date     &lt;dttm&gt; 2015-01-07, 2015-01-07, 2015-01-10, 2015-01-10, 201...
+## $ customer.id    &lt;dbl&gt; 2, 2, 10, 10, 6, 6, 6, 6, 6, 22, 8, 8, 8, 8, 16, 16,...
+## $ product.id     &lt;dbl&gt; 2681, 2411, 2629, 2137, 2367, 1973, 2422, 2655, 2247...
+## $ quantity       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1...
+## $ model          &lt;chr&gt; &quot;Spectral CF 7 WMN&quot;, &quot;Ultimate CF SLX Disc 8.0 ETAP&quot;...
+## $ model.year     &lt;dbl&gt; 2021, 2020, 2021, 2019, 2020, 2020, 2020, 2021, 2020...
+## $ frame.material &lt;chr&gt; &quot;carbon&quot;, &quot;carbon&quot;, &quot;carbon&quot;, &quot;carbon&quot;, &quot;aluminium&quot;,...
+## $ weight         &lt;dbl&gt; 13.80, 7.44, 14.06, 8.80, 11.50, 8.80, 8.20, 8.85, 1...
+## $ price          &lt;dbl&gt; 3119, 5359, 2729, 1749, 1219, 1359, 2529, 1559, 3899...
+## $ category       &lt;chr&gt; &quot;Mountain - Trail - Spectral&quot;, &quot;Road - Race - Ultima...
+## $ gender         &lt;chr&gt; &quot;female&quot;, &quot;unisex&quot;, &quot;unisex&quot;, &quot;unisex&quot;, &quot;unisex&quot;, &quot;u...
+## $ url            &lt;chr&gt; &quot;https://www.canyon.com/en-de/mountain-bikes/trail-b...
+## $ name           &lt;chr&gt; &quot;AlexandeRad&quot;, &quot;AlexandeRad&quot;, &quot;WITT-RAD&quot;, &quot;WITT-RAD&quot;...
+## $ location       &lt;chr&gt; &quot;Hamburg, Hamburg&quot;, &quot;Hamburg, Hamburg&quot;, &quot;Bremen, Bre...
+## $ lat            &lt;dbl&gt; 53.57532, 53.57532, 53.07379, 53.07379, 48.78234, 48...
+## $ lng            &lt;dbl&gt; 10.015340, 10.015340, 8.826754, 8.826754, 9.180819, ...</code></pre>
+<pre class="r"><code># 5.0 Wrangling Data ----
+bike_orderlines_wrangled &lt;- bike_orderlines_joined %&gt;%
+separate(category,into = c(&quot;category.1&quot;,&quot;category.2&quot;,&quot;category.3&quot;
+                           ,sep = &quot; - &quot;)) %&gt;%
+  mutate(total.price=price * quantity) %&gt;%
+  set_names(names(.) %&gt;% str_replace_all(&quot;\\.&quot;, &quot;_&quot;))
+
+
+bike_orderlines_groupedbycategory &lt;- bike_orderlines_wrangled %&gt;% 
+  group_by(category_1) %&gt;%
+  summarize(total_price = sum(price*quantity)) 
+
+# 6.0 Business Insights ----
+# 6.1 Sales by Year ----
+
+# Step 1 - Manipulate
+bike_orderlines_salesbyyear &lt;- bike_orderlines_wrangled %&gt;% 
+  transmute(date=year(order_date),total_price) %&gt;%
+  group_by(date) %&gt;%
+  summarise(total_sales = sum(total_price)) %&gt;%
+  mutate(sales_text = scales::dollar(total_sales,big.mark = &quot;.&quot;, 
+                                   decimal.mark = &quot;,&quot;, suffix = &quot; €&quot;))
+# Step 2 - Visualize
+bike_orderlines_salesbyyear %&gt;% 
+  ggplot(aes(x=date,y=total_sales)) + 
+  geom_bar(stat = &quot;identity&quot;) +
+  geom_col(fill=&quot;#2DC6D6&quot;) +
+  geom_label(aes(label = sales_text)) +
+  scale_y_continuous(labels = scales::dollar_format(big.mark = &quot;.&quot;, 
+                                                    decimal.mark = &quot;,&quot;, 
+                                                    prefix = &quot;&quot;, 
+                                                    suffix = &quot; €&quot;)) +
+  labs(
+    title = &quot;Revenue by year&quot;,
+    subtitle = &quot;Upward Trend&quot;,
+    x = &quot;&quot;,
+    y = &quot;Revenue&quot;
+  )</code></pre>
+<p><img src="journal_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code># 6.2 Sales by Year and Category 2 ----
+
+# Step 1 - Manipulate
+bike_orderlines_salesbyyearcategory &lt;-  bike_orderlines_wrangled %&gt;% 
+  transmute(date=year(order_date),total_price, category_1) %&gt;%
+  group_by(date,category_1) %&gt;%
+  summarise(total_sales = sum(total_price)) %&gt;%
+  mutate(sales_text = scales::dollar(total_sales,big.mark = &quot;.&quot;, 
+                                     decimal.mark = &quot;,&quot;, suffix = &quot; €&quot;))
+# Step 2 - Visualize
+
+bike_orderlines_salesbyyearcategory %&gt;% 
+  ggplot(aes(x=date,y=total_sales, fill = category_1)) + 
+  geom_bar(stat = &quot;identity&quot;) +
+  scale_y_continuous(labels = scales::dollar_format(big.mark = &quot;.&quot;, 
+                                                    decimal.mark = &quot;,&quot;, 
+                                                    prefix = &quot;&quot;, 
+                                                    suffix = &quot; €&quot;)) +
+  labs(
+    title = &quot;Revenue by year and category&quot;,
+    subtitle = &quot;Each product category has an upward trend&quot;,
+    x = &quot;&quot;,
+    y = &quot;Revenue&quot;,
+    fill = &quot;Main Category&quot;
+  ) +
+  facet_wrap(vars(category_1))</code></pre>
+<p><img src="journal_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<pre class="r"><code># 7.0 Writing Files ----
+
+# 7.1 Excel ----
+library(writexl)
+bike_orderlines_wrangled %&gt;%
+  write_xlsx(&quot;D:/Lucas/Uni/Data Science/DS_101/00_data/01_bike_sales/02_wrangled_data/bike_orderlines.xlsx&quot;)
+# 7.2 CSV ----
+bike_orderlines_wrangled %&gt;%
+  write_csv(&quot;D:/Lucas/Uni/Data Science/DS_101/00_data/01_bike_sales/02_wrangled_data/bike_orderlines.csv&quot;)
+# 7.3 RDS ----
+bike_orderlines_wrangled %&gt;%
+  write_rds(&quot;D:/Lucas/Uni/Data Science/DS_101/00_data/01_bike_sales/02_wrangled_data/bike_orderlines.rds&quot;)</code></pre>
+<div id="challenge" class="section level2">
+<h2><span class="header-section-number">1.1</span> Challenge</h2>
+<pre class="r"><code># 8.0 Challenge ----
+
+# Step 1 - Manipulate
+bike_orderlines_wrangled_location &lt;- bike_orderlines_wrangled %&gt;%
+  transmute(location, total_price, year = year(order_date)) %&gt;%
+  separate(col = location, into = c(&quot;city&quot;,&quot;state&quot;),sep=&quot;, &quot;) %&gt;%
+  group_by(state, year) %&gt;%
+  summarise(sales = sum(total_price)) %&gt;%
+  mutate(sales_text = scales::dollar(sales,big.mark = &quot;.&quot;, 
+                                     decimal.mark = &quot;,&quot;, suffix = &quot; €&quot;))
+  
+# Step 2 - Visualize
+bike_orderlines_wrangled_location %&gt;% 
+  ggplot(aes(x=year,y=sales, fill = state)) + 
+  geom_bar(stat = &quot;identity&quot;) +
+  scale_y_continuous(labels = scales::dollar_format(big.mark = &quot;.&quot;, 
+                                                    decimal.mark = &quot;,&quot;, 
+                                                    prefix = &quot;&quot;, 
+                                                    suffix = &quot; €&quot;)) +
+  labs(
+    title = &quot;Revenue by year and category&quot;,
+    subtitle = &quot;&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Revenue&quot;,
+    fill = &quot;Main Category&quot;
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  facet_wrap(vars(state))</code></pre>
+<p><img src="journal_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+</div>
+<div id="data-acquisition" class="section level1">
+<h1><span class="header-section-number">2</span> Data Acquisition</h1>
+<pre class="r"><code># WEBSCRAPING ----
+
+# 1.0 LIBRARIES ----
+
+library(tidyverse) # Main Package - Loads dplyr, purrr, etc.
+library(rvest)     # HTML Hacking &amp; Web Scraping
+library(xopen)     # Quickly opening URLs
+library(jsonlite)  # converts JSON files to R objects
+library(glue)      # concatenate strings
+library(stringi)   # character string/text processing
+library(dplyr)
+library(tidyr)
+
+# Challenge 1 ----
+library(RedditExtractoR)
+example_urls = reddit_urls(search_terms = &quot;sport&quot;) %&gt;%
+  slice(1:10)
+example_urls</code></pre>
+<pre><code>##        date num_comments
+## 1  02-12-20         1964
+## 2  02-12-20         2235
+## 3  30-11-20          630
+## 4  23-11-20          714
+## 5  22-11-20         1105
+## 6  29-11-20          906
+## 7  02-12-20          561
+## 8  30-11-20          696
+## 9  27-11-20          633
+## 10 01-12-20          610
+##                                                                                                                                                                                                                                                                                                              title
+## 1                                                                                                             [Charania] Los Angeles Lakers star LeBron James has agreed to a two-year, $85 million maximum contract extension with the franchise, CEO of Klutch Sports, Rich Paul, told @TheAthleticNBA @Stadium.
+## 2                                                                                                                                                                                                                         Kirk Herbstreit worried for college football: &quot;What the hell is happening to our sport?&quot;
+## 3               TIL 42-year-old Zamboni driver, kidney transplant recipient, and practice hockey goalie David Ayres, led the Carolina Hurricanes to a 6-3 win after their two pro goalies were injured. Cheered by the opposing team&#39;s fans, he was the oldest player ever to make his pro debut in a major sport.
+## 4                                                                                                                                                                                                                                                                         It&#39;s a sport. It can&#39;t be bad for you...
+## 5                                                                                                          [Wojnarowski] Utah Jazz All-Star guard Donovan Mitchell has agreed to a five-year, $195M designated rookie max extension, his agents Ty Sullivan and Austin Brown of @caa_sports tell ESPN. Story soon.
+## 6                                                                                                                                                                                                                                                 Brett Favre: Sports Fans Don&#39;t Want Political Messaging At Games
+## 7  [Wojnarowski] Clippers are waiving center Joakim Noah -- and his agent, Bill Duffy of @BDA_Sports, tells ESPN that Noah is \034likely headed toward retirement.\035 One of his era\031s most ferocious competitors, Noah played 13 seasons, made two All-Star games and was a 3-time All-Defensive team choice.
+## 8                                                                                                                                                                                                                       [CBS Sports] Tom Brady has now lost 3 straight home games for the first time in his career
+## 9                                                                                            [My Sports Update] On this day in 2007, Sean Taylor was shot and killed from a gunshot wound protecting his family from armed robbers. He was only 24 years old. One of the most electric players in the NFL. RIP 21.
+## 10                                                                                                                                                                                                    EA SPORTS hit with another FIFA 21 scripting lawsuit for &quot;dictating outcomes&quot; in Ultimate Team to sell packs
+##          subreddit
+## 1              nba
+## 2              CFB
+## 3    todayilearned
+## 4  awfuleverything
+## 5              nba
+## 6     Conservative
+## 7              nba
+## 8              nfl
+## 9              nfl
+## 10            FIFA
+##                                                                                                      URL
+## 1         http://www.reddit.com/r/nba/comments/k5e528/charania_los_angeles_lakers_star_lebron_james_has/
+## 2         http://www.reddit.com/r/CFB/comments/k5d980/kirk_herbstreit_worried_for_college_football_what/
+## 3  http://www.reddit.com/r/todayilearned/comments/k3yd4m/til_42yearold_zamboni_driver_kidney_transplant/
+## 4            http://www.reddit.com/r/awfuleverything/comments/jzsrrg/its_a_sport_it_cant_be_bad_for_you/
+## 5               http://www.reddit.com/r/nba/comments/jyz6fz/wojnarowski_utah_jazz_allstar_guard_donovan/
+## 6      http://www.reddit.com/r/Conservative/comments/k3fhy2/brett_favre_sports_fans_dont_want_political/
+## 7            http://www.reddit.com/r/nba/comments/k505y5/wojnarowski_clippers_are_waiving_center_joakim/
+## 8         http://www.reddit.com/r/nfl/comments/k3yoh0/cbs_sports_tom_brady_has_now_lost_3_straight_home/
+## 9          http://www.reddit.com/r/nfl/comments/k220r2/my_sports_update_on_this_day_in_2007_sean_taylor/
+## 10            http://www.reddit.com/r/FIFA/comments/k4q0ez/ea_sports_hit_with_another_fifa_21_scripting/</code></pre>
+<pre class="r"><code># Challenge 2 ----
+# 1.1 COLLECT PRODUCT FAMILIES ----
+
+url_home          &lt;- &quot;https://www.rosebikes.com/bikes/mtb&quot;
+
+# Read in the HTML for the entire webpage
+html_home         &lt;- read_html(url_home)
+
+
+# Extract the urls from the href attribute
+bike_category_tbl &lt;- html_home %&gt;%
+  
+  # Going further down the tree and select nodes by class
+  # Selecting two classes makes it specific enough
+  html_nodes(css = &quot;.catalog-navigation__link&quot;) %&gt;%
+  html_attr(&#39;href&#39;) %&gt;%
+  
+  # Convert vector to tibble
+  enframe(name = &quot;position&quot;, value = &quot;subdirectory&quot;) %&gt;%
+  
+  # Add the domain, because we will get only the subdirectories
+  mutate(
+    url = glue(&quot;https://www.rosebikes.com{subdirectory}&quot;)
+  ) %&gt;%
+  
+  # Some categories are listed multiple times.
+  # We only need unique values
+  distinct(url)
+
+glimpse(bike_category_tbl)</code></pre>
+<pre><code>## Rows: 5
+## Columns: 1
+## $ url &lt;glue&gt; &quot;https://www.rosebikes.com/bikes/mtb&quot;, &quot;https://www.rosebikes....</code></pre>
+<pre class="r"><code># 2.1 Get URL for each bike of the Product categories ----
+
+
+
+get_bike_data &lt;- function(url){
+  
+  html_bike_category  &lt;- read_html(url)
+  
+  bike_price_tbl        &lt;- html_bike_category %&gt;%
+    html_nodes(css = &quot;.catalog-category-bikes__price-title&quot;) %&gt;%
+    html_text() %&gt;%
+    str_remove(pattern = &quot;\\?.*&quot;) %&gt;%
+    enframe(name = &quot;position&quot;, value = &quot;price&quot;)
+  
+  bike_title_price_tbl        &lt;- html_bike_category %&gt;%
+    html_nodes(css = &quot;.catalog-category-bikes__title&quot;) %&gt;%
+    html_text() %&gt;%
+    str_remove(pattern = &quot;\\?.*&quot;) %&gt;%
+    enframe(name = &quot;position&quot;, value = &quot;title&quot;) %&gt;%
+    left_join(bike_price_tbl,by = c(&quot;position&quot; = &quot;position&quot;))
+}
+  
+#bike_category_url &lt;- bike_category_tbl$url[2]
+#bike_data_tbl &lt;- get_bike_data(bike_category_url)
+
+#glimpse(bike_data_tbl)
+# Extract the urls as a character vector
+bike_category_url_vec &lt;- bike_category_tbl %&gt;% 
+  pull(url)
+
+# Run the function with every url as an argument
+bike_data_lst &lt;- map(bike_category_url_vec, get_bike_data)
+
+# Merge the list into a tibble
+bike_data_tbl &lt;- bind_rows(bike_data_lst) %&gt;%
+  distinct(title, .keep_all=TRUE)
+bike_data_tbl</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    position title                       price               
+##       &lt;int&gt; &lt;chr&gt;                       &lt;chr&gt;               
+##  1        1 &quot;\n\nGROUND CONTROL\n\n&quot;    &quot;\nfrom €1,699.00\n&quot;
+##  2        2 &quot;\n\nROOT MILLER\n\n&quot;       &quot;\nfrom €1,999.00\n&quot;
+##  3        3 &quot;\n\nPIKES PEAK\n\n&quot;        &quot;\nfrom €3,099.00\n&quot;
+##  4        4 &quot;\n\nTHE BRUCE\n\n&quot;         &quot;\n&quot;                
+##  5        5 &quot;\n\nCOUNT SOLO\n\n&quot;        &quot;\n&quot;                
+##  6        6 &quot;\n\nPSYCHO PATH\n\n&quot;       &quot;\nfrom €1,849.00\n&quot;
+##  7        7 &quot;\n\nTHRILL HILL\n\n&quot;       &quot;\nfrom €2,599.00\n&quot;
+##  8        8 &quot;\n\nTHRILL HILL TRAIL\n\n&quot; &quot;\nfrom €2,899.00\n&quot;
+##  9        9 &quot;\n\nSOUL FIRE\n\n&quot;         &quot;\nfrom €2,149.00\n&quot;
+## 10        1 &quot;\n \nTHE BRUCE\n\n&quot;        &quot;\n&quot;</code></pre>
+</div>
+<div id="data-wrangling" class="section level1">
+<h1><span class="header-section-number">3</span> Data Wrangling</h1>
+<pre class="r"><code># Tidyverse
+library(tidyverse)
+library(vroom)
+
+# Data Table
+library(data.table)
+
+# Counter
+library(tictoc)
+
+library(lubridate)
+# Load data ----
+#Assignee
+col_types &lt;- list(
+  id = col_character(),
+  type = col_character(),
+  name_first = col_skip(),
+  name_last = col_skip(),
+  organization = col_character()
+)
+
+assignee_tbl &lt;- vroom(
+  file       = &quot;D:/Lucas/Uni/Data Science/DS_101/02_data_wrangling/assignee/assignee.tsv&quot;, 
+  delim      = &quot;\t&quot;, 
+  col_types  = col_types,
+  na         = c(&quot;&quot;, &quot;NA&quot;, &quot;NULL&quot;)
+)
+#Patent_assignee
+col_types &lt;- list(
+  patent_id = col_character(),
+  assignee_id = col_character(),
+  location_id = col_skip()
+)
+patent_assignee_tbl &lt;- vroom(
+  file       = &quot;D:/Lucas/Uni/Data Science/DS_101/02_data_wrangling/patent_assignee/patent_assignee.tsv&quot;, 
+  delim      = &quot;\t&quot;, 
+  col_types  = col_types,
+  na         = c(&quot;&quot;, &quot;NA&quot;, &quot;NULL&quot;)
+)
+#Patent
+col_types &lt;- list(
+  id = col_character(),
+  type = col_skip(),
+  number = col_character(),
+  country = col_skip(),
+  date = col_date(&quot;%Y-%m-%d&quot;),
+  abstract = col_skip(),
+  title = col_skip(),
+  kind = col_skip(),
+  num_claims = col_skip(),
+  filename = col_skip(),
+  withdrawn = col_skip()
+  
+)
+patent_tbl &lt;- vroom(
+  file       = &quot;D:/Lucas/Uni/Data Science/DS_101/02_data_wrangling/patent/patent.tsv&quot;, 
+  delim      = &quot;\t&quot;, 
+  col_types  = col_types,
+  na         = c(&quot;&quot;, &quot;NA&quot;, &quot;NULL&quot;)
+)
+#Uspc
+col_types &lt;- list(
+  uuid = col_skip(),
+  patent_id = col_character(),
+  mainclass_id = col_character(),
+  subclass_id = col_skip(),
+  sequence = col_skip()
+ 
+  
+)
+uspc_tbl &lt;- vroom(
+  file       = &quot;D:/Lucas/Uni/Data Science/DS_101/02_data_wrangling/uspc/uspc.tsv&quot;, 
+  delim      = &quot;\t&quot;, 
+  col_types  = col_types,
+  na         = c(&quot;&quot;, &quot;NA&quot;, &quot;NULL&quot;)
+)</code></pre>
+<div id="challenges" class="section level2">
+<h2><span class="header-section-number">3.1</span> Challenges</h2>
+<pre class="r"><code># Challenge 1 ----
+
+  
+first_tbl &lt;- assignee_tbl %&gt;% filter(type == 2) %&gt;% 
+  select(-type) %&gt;%
+  left_join(patent_assignee_tbl, by = c(&quot;id&quot;=&quot;assignee_id&quot;)) %&gt;% 
+  group_by(organization) %&gt;%
+  count(organization,name = &quot;count&quot;, sort=TRUE) %&gt;%
+  slice(1:10)
+first_tbl</code></pre>
+<pre><code>## # A tibble: 226,687 x 2
+## # Groups:   organization [226,687]
+##    organization                                                            count
+##    &lt;chr&gt;                                                                   &lt;int&gt;
+##  1 &quot;&#39;brellabox Inc.&quot;                                                           2
+##  2 &quot;!j Incorporated&quot;                                                           2
+##  3 &quot;!maginethis Renovations, LLC&quot;                                              3
+##  4 &quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;A\&quot;\&quot;\&quot;~     5
+##  5 &quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;A\&quot;\&quot;\&quot;~     2
+##  6 &quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;A\&quot;\&quot;\&quot;~     2
+##  7 &quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;Z\&quot;\&quot;\&quot;~     2
+##  8 &quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;Advanced Energy Concept \&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\~     2
+##  9 &quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;Brand \&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;X~     2
+## 10 &quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;Chas. \&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;R~     3
+## # ... with 226,677 more rows</code></pre>
+<pre class="r"><code># Challenge 2 ----
+
+assignee_patent_assignee_wrangled &lt;- assignee_tbl %&gt;% 
+  left_join(patent_assignee_tbl, by = c(&quot;id&quot;=&quot;assignee_id&quot;)) %&gt;%
+  select(-id)
+
+second_tbl &lt;- patent_tbl %&gt;% filter (year(date) == 2019) %&gt;%
+  select (-date) %&gt;%
+  left_join(assignee_patent_assignee_wrangled, by = c(&quot;id&quot; = &quot;patent_id&quot;)) %&gt;%
+  filter(type == 2) %&gt;%
+  group_by(organization) %&gt;%
+  count(organization,name = &quot;count&quot;, sort=TRUE) %&gt;%
+  slice(1:10)
+second_tbl</code></pre>
+<pre><code>## # A tibble: 26,639 x 2
+## # Groups:   organization [26,639]
+##    organization         count
+##    &lt;chr&gt;                &lt;int&gt;
+##  1 #1 A LifeSafer, Inc.     1
+##  2 (WE) FOR DOGS, LLC       1
+##  3 [24]7.ai, Inc.          20
+##  4 03312004 LLC             1
+##  5 034MOTORSPORT            1
+##  6 1-800 Contacts, Inc.     1
+##  7 1,4 Group, Inc.          1
+##  8 10&amp;8                     1
+##  9 100% Speedlab, LLC       4
+## 10 1087 SYSTEMS, INC.       3
+## # ... with 26,629 more rows</code></pre>
+<pre class="r"><code># Challenge 3 ----
+most_innovative_sector &lt;- uspc_tbl %&gt;%
+  group_by(mainclass_id) %&gt;%
+  count(mainclass_id, name = &quot;count&quot;, sort=TRUE) %&gt;%
+  slice(1)
+most_innovative_sector</code></pre>
+<pre><code>## # A tibble: 1,237 x 2
+## # Groups:   mainclass_id [1,237]
+##    mainclass_id count
+##    &lt;chr&gt;        &lt;int&gt;
+##  1 -0T              1
+##  2 ;16              1
+##  3 ;47              1
+##  4 ???              1
+##  5 0                4
+##  6 00               3
+##  7 002              6
+##  8 004             12
+##  9 008              8
+## 10 01               1
+## # ... with 1,227 more rows</code></pre>
+<pre class="r"><code>top10ww &lt;- assignee_tbl %&gt;% 
+  select(-type) %&gt;%
+  left_join(patent_assignee_tbl, by = c(&quot;id&quot;=&quot;assignee_id&quot;)) %&gt;% 
+  filter(!is.na(organization)) %&gt;%
+  group_by(organization) %&gt;%
+  count(organization,name = &quot;count&quot;, sort=TRUE) %&gt;%
+  ungroup() %&gt;%
+  slice(1:10)
+top10ww</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    organization                                 count
+##    &lt;chr&gt;                                        &lt;int&gt;
+##  1 International Business Machines Corporation 139092
+##  2 Samsung Electronics Co., Ltd.                93562
+##  3 Canon Kabushiki Kaisha                       75910
+##  4 Sony Corporation                             54343
+##  5 Kabushiki Kaisha Toshiba                     49443
+##  6 General Electric Company                     47122
+##  7 Hitachi, Ltd.                                45375
+##  8 Intel Corporation                            42157
+##  9 Fujitsu Limited                              37197
+## 10 Hewlett-Packard Development Company, L.P.    35573</code></pre>
+<pre class="r"><code>top5uspto &lt;- assignee_tbl %&gt;% filter( organization %in% top10ww$organization) %&gt;%
+  left_join(patent_assignee_tbl, by = c(&quot;id&quot; = &quot;assignee_id&quot;)) %&gt;%
+  left_join(uspc_tbl, by = c(&quot;patent_id&quot;=&quot;patent_id&quot;)) %&gt;%
+  filter(!is.na(mainclass_id)) %&gt;%
+  group_by(mainclass_id) %&gt;%
+  count(mainclass_id,name = &quot;count&quot;, sort=TRUE) %&gt;%
+  ungroup() %&gt;%
+  slice(1:5)
+top5uspto</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   mainclass_id count
+##   &lt;chr&gt;        &lt;int&gt;
+## 1 257          90981
+## 2 438          52071
+## 3 365          40283
+## 4 370          36369
+## 5 358          36227</code></pre>
+</div>
+</div>
+<div id="visualisation" class="section level1">
+<h1><span class="header-section-number">4</span> Visualisation</h1>
+<pre class="r"><code># 1.0 Lollipop Chart: Top N Customers ----
+library(tidyverse)
+library(lubridate)
+
+bike_orderlines_tbl &lt;- read_rds(&quot;00_data/01_bike_sales/02_wrangled_data/bike_orderlines.rds&quot;)</code></pre>
+<pre><code>## Error in gzfile(file, &quot;rb&quot;): cannot open the connection</code></pre>
+<pre class="r"><code>n &lt;- 10
+# Data Manipulation
+top_customers_tbl &lt;- bike_orderlines_tbl %&gt;%
+  rename(bikeshop = name) %&gt;%
+  
+  # Select relevant columns
+  select(bikeshop, total_price) %&gt;%
+  
+  # Collapse the least frequent values into &quot;other&quot;
+  mutate(bikeshop = as_factor(bikeshop) %&gt;% fct_lump(n = n, w = total_price)) %&gt;%
+  
+  # Group and summarize
+  group_by(bikeshop) %&gt;%
+  summarize(revenue = sum(total_price)) %&gt;%
+  ungroup() %&gt;%
+  
+  # Reorder the column customer_city by revenue
+  mutate(bikeshop = bikeshop %&gt;% fct_reorder(revenue)) %&gt;%
+  # Place &quot;Other&quot; at the beginning
+  mutate(bikeshop = bikeshop %&gt;% fct_relevel(&quot;Other&quot;, after = 0)) %&gt;%
+  # Sort by this column
+  arrange(desc(bikeshop)) %&gt;%
+  
+  # Add Revenue Text
+  mutate(revenue_text = scales::dollar(revenue, 
+                                       scale  = 1e-6, 
+                                       prefix = &quot;&quot;, 
+                                       suffix = &quot;M ???&quot;)) %&gt;%
+  
+  # Add Cumulative Percent
+  mutate(cum_pct = cumsum(revenue) / sum(revenue)) %&gt;%
+  mutate(cum_pct_text = scales::percent(cum_pct)) %&gt;%
+  
+  # Add Rank
+  mutate(rank = row_number()) %&gt;%
+  mutate(rank = case_when(
+    rank == max(rank) ~ NA_integer_,
+    TRUE ~ rank
+  )) %&gt;%
+  
+  # Add Label text
+  mutate(label_text = str_glue(&quot;Rank: {rank}\nRev: {revenue_text}\nCumPct: {cum_pct_text}&quot;))</code></pre>
+<pre><code>## Error in rename(., bikeshop = name): object &#39;bike_orderlines_tbl&#39; not found</code></pre>
+<pre class="r"><code># Data Visualization
+top_customers_tbl %&gt;%
+  
+  # Canvas
+  ggplot(aes(revenue, bikeshop)) +
+  
+  # Geometries
+  geom_segment(aes(xend = 0, yend = bikeshop), 
+               color = RColorBrewer::brewer.pal(n = 11, name = &quot;RdBu&quot;)[11],
+               size  = 1) +
+  
+  geom_point(aes(size = revenue),
+             color = RColorBrewer::brewer.pal(n = 11, name = &quot;RdBu&quot;)[11]) +
+  
+  geom_label(aes(label = label_text), 
+             hjust = &quot;inward&quot;,
+             size  = 3,
+             color = RColorBrewer::brewer.pal(n = 11, name = &quot;RdBu&quot;)[11]) +
+  
+  # Formatting
+  scale_x_continuous(labels = scales::dollar_format(scale = 1e-6, 
+                                                    prefix = &quot;&quot;,
+                                                    suffix = &quot;M ???&quot;)) +
+  labs(
+    title = str_glue(&quot;Top {n} Customers&quot;),
+    subtitle = str_glue(
+      &quot;Start: {year(min(bike_orderlines_tbl$order_date))}
+               End:  {year(max(bike_orderlines_tbl$order_date))}&quot;),
+    x = &quot;Revenue (M ???)&quot;,
+    y = &quot;Customer&quot;,
+    caption = str_glue(&quot;Top 6 customers contribute
+                           52% of purchasing power.&quot;)
+  ) +
+  
+  theme_minimal() +
+  theme(
+    legend.position = &quot;none&quot;,
+    plot.title = element_text(face = &quot;bold&quot;),
+    plot.caption = element_text(face = &quot;bold.italic&quot;)
+  )</code></pre>
+<pre><code>## Error in ggplot(., aes(revenue, bikeshop)): object &#39;top_customers_tbl&#39; not found</code></pre>
+<div id="challenges-1" class="section level2">
+<h2><span class="header-section-number">4.1</span> Challenges</h2>
+<pre class="r"><code># Challenge 1 ----
+library(tidyverse)
+library(lubridate)
+library(wesanderson)
+covid_data_tbl &lt;- read_csv(&quot;https://opendata.ecdc.europa.eu/covid19/casedistribution/csv&quot;)
+
+covid_data_filtered &lt;- covid_data_tbl %&gt;% 
+  rename(cumulative = &quot;Cumulative_number_for_14_days_of_COVID-19_cases_per_100000&quot;) %&gt;%
+  filter( year == 2020 &amp; (countriesAndTerritories == &quot;United_States_of_America&quot;| 
+                                                   countriesAndTerritories == &quot;Spain&quot; |
+                                                   countriesAndTerritories == &quot;Germany&quot;|
+                                                   countriesAndTerritories == &quot;France&quot;|
+                                                   countriesAndTerritories == &quot;United_Kingdom&quot;) )%&gt;%
+  mutate(date=as.Date(dateRep,format = &quot;%d/%m/%Y&quot;)) %&gt;%
+  arrange(date) %&gt;%
+  group_by(countriesAndTerritories) %&gt;%
+  mutate(cum_cases = cumsum(cases))
+
+lastdate &lt;- covid_data_filtered %&gt;% slice(which.max(date)) %&gt;% filter(countriesAndTerritories == &quot;United_States_of_America&quot;)
+
+
+covid_data_filtered %&gt;%
+  ggplot(aes(x = date, y = cum_cases, color = countriesAndTerritories)) +
+  geom_line(size= 1, linetype = 1) +
+  scale_y_continuous(breaks = seq(0, 20e6, by = 2.5e6),labels = scales::dollar_format(scale = 1e-6, 
+                                                    prefix = &quot;&quot;,
+                                                    suffix = &quot;M&quot;,
+                                                    accuracy = 0.1))+
+  scale_x_date(date_label = &quot;%B&quot;, breaks = &quot;month&quot;)+
+  geom_label(data =  lastdate, aes(label =  scales::dollar(cum_cases, 
+                                        scale  = 1e-6, 
+                                        prefix = &quot;&quot;,
+                                        suffix = &quot;M&quot;)), 
+            vjust = 1.5, color = &quot;white&quot;, fill = &quot;lightblue&quot;) +
+  labs(
+    title = str_glue(&quot;COVID-19 confirmed cases worldwide&quot;),
+    subtitle = str_glue(&quot;&quot;),
+    x = &quot;Year 2020&quot;,
+    y = &quot;Cumulative Cases&quot;,
+    color = &quot;Countries / Region&quot;
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle =45),
+    legend.position = &quot;bottom&quot;,
+    axis.title = element_text(face = &quot;bold&quot;)) +
+  guides(col = guide_legend(nrow = 2)) +
+  scale_color_brewer(palette= &quot;Accent&quot;)</code></pre>
+<p><img src="journal_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code># Challenge 2 ----
+library(maps)
+require(maps)
+require(viridis)
+
+
+
+covid_data_2 &lt;- covid_data_tbl %&gt;% 
+  mutate(across(countriesAndTerritories, str_replace_all, &quot;_&quot;, &quot; &quot;)) %&gt;%
+  mutate(countriesAndTerritories = case_when(
+    
+    countriesAndTerritories == &quot;United Kingdom&quot; ~ &quot;UK&quot;,
+    countriesAndTerritories == &quot;United States of America&quot; ~ &quot;USA&quot;,
+    countriesAndTerritories == &quot;Czechia&quot; ~ &quot;Czech Republic&quot;,
+    TRUE ~ countriesAndTerritories
+    
+  )) %&gt;% group_by(countriesAndTerritories)%&gt;%
+  summarise(mort_rate= sum(deaths)/max(popData2019))%&gt;%
+  ungroup() 
+
+world_map &lt;- map_data(&quot;world&quot;) %&gt;% left_join(covid_data_2,by = c(&quot;region&quot; = &quot;countriesAndTerritories&quot;))
+
+total_deaths_ww &lt;- sum(covid_data_tbl$deaths)*1e-5
+
+ggplot(world_map, aes(x = long, y = lat, group = group)) +
+  geom_polygon(aes(fill = mort_rate ))+
+  scale_fill_viridis_c(option = &quot;E&quot;, end = 0.35, direction = -1,breaks = seq(0, 2e-3, by=3e-4),labels = scales::dollar_format(scale = 1e2, 
+                                                                                            prefix = &quot;&quot;,
+                                                                                            suffix = &quot;%&quot;,
+                                                                                            accuracy = 0.001)) +
+  labs(
+    title = str_glue(&quot; COnfirmed COVID-19 deaths relative to the size of the population&quot;),
+    subtitle = str_glue(&quot;More than {floor(total_deaths_ww)*1e-1} Million confirmed COVID-19 deaths worldwide&quot;),
+    x = &quot;&quot;,
+    y = &quot;&quot;,
+    fill = &quot;Mortality Rate&quot;
+  ) +
+  theme_minimal() +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y = element_blank())</code></pre>
+<p><img src="journal_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
